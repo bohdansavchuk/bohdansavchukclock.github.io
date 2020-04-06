@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+    </div>
+    <div class="button">
+        <input class="check" type="checkbox" name="check" id="newchec" value="Название">
+        <label for="newchec"></label>
+    </div>
+    <script>
+        const deg = 6,
+            hr = document.getElementById('hr'),
+            mn = document.getElementById('mn'),
+            sc = document.getElementById('sc'),
+            button = document.querySelector('.check'),
+            body = document.querySelector('body'),
+            clock = document.querySelector('.clock');
+
+        button.addEventListener('change', (event) => {
+            event.preventDefault();
+            let target = event.target;
+            body.classList.toggle('active');
+            clock.classList.toggle('active');
+            hr.classList.toggle('active');
+            mn.classList.toggle('active');
+            sc.classList.toggle('active');
+        });
+
+        setInterval(() => {
+            let day = new Date(),
+                hh = day.getHours() * 30,
+                mm = day.getMinutes() * deg,
+                ss = day.getSeconds() * deg;
+
+            hr.style.transform = `rotateZ(${(hh) + (mm/12)}deg)`;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+        });
+
+
+    </script>
+</body>
+</html>
